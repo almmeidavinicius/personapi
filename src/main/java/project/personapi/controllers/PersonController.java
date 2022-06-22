@@ -8,6 +8,7 @@ import project.personapi.dto.response.MessageResponseDTO;
 import project.personapi.exceptions.PersonNotFoundException;
 import project.personapi.services.PersonService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -41,5 +42,10 @@ public class PersonController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteById(@PathVariable Long id) throws PersonNotFoundException {
         personService.deleteById(id);
+    }
+
+    @PutMapping("/{id}")
+    public MessageResponseDTO update(@PathVariable Long id, @RequestBody @Valid PersonDTO personDTO) throws PersonNotFoundException {
+        return personService.update(id, personDTO);
     }
 }
