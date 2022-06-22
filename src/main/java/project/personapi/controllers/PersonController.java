@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import project.personapi.dto.request.PersonDTO;
 import project.personapi.dto.response.MessageResponseDTO;
+import project.personapi.exceptions.PersonNotFoundException;
 import project.personapi.services.PersonService;
 
 import java.util.List;
@@ -29,5 +30,10 @@ public class PersonController {
     @GetMapping
     public List<PersonDTO> listAll(){
         return personService.listAll();
+    }
+
+    @GetMapping("/{id}")
+    public PersonDTO findById(@PathVariable Long id) throws PersonNotFoundException {
+        return personService.findById(id);
     }
 }
